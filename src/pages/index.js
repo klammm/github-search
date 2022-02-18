@@ -9,6 +9,7 @@ import { getGithubData } from "../utils/api";
 const IndexPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState({ items: [] });
+  const [sort, setSort] = useState('best match');
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,6 +21,7 @@ const IndexPage = () => {
       setSearchResults,
       setError,
       searchQuery,
+      sort,
     })
   };
 
@@ -30,9 +32,10 @@ const IndexPage = () => {
         setSearchResults,
         setError,
         searchQuery,
+        sort,
       })
     }
-  }, [currentPage])
+  }, [currentPage, sort])
 
   if (error) {
     return <h1>{error}</h1>;
@@ -46,6 +49,12 @@ const IndexPage = () => {
         setSearchQuery={setSearchQuery}
         onSubmit={handleSubmit}
       />
+      <select className="bg-transparent p-2 border-2 mb-2" id="sort-by" onChange={e => setSort(e.target.value)}>
+        <label htmlFor="sort-by">Choose a sorting method</label>
+        <option value="best match">Best match</option>
+        <option value="stars">Stars</option>
+        <option value="forks">Forks</option>
+      </select>
       {searchResults.items.length !== 0 && (
         <>
           <h1>{searchResults.total_count} repositories found</h1>
