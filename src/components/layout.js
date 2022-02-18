@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main>{children}</main>
+        <main className="bg-gsw-blue p-5">{children}</main>
         <footer
           style={{
             marginTop: `2rem`,
